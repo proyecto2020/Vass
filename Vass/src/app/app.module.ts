@@ -5,12 +5,15 @@ import { AppComponent } from './app.component';
 import { ProductosComponent } from './productos/productos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { PipetransformPipe } from './pipes/pipetransform.pipe';
 import { SubproductosComponent } from './subproductos/subproductos.component';
 import { NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
 import { PersistenceModule } from 'angular-persistence';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { PersistenceModule } from 'angular-persistence';
     ProductosComponent,
     PipetransformPipe,
     SubproductosComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,9 +34,11 @@ import { PersistenceModule } from 'angular-persistence';
     FormsModule,
     NgSelectModule,
     PersistenceModule,
+    NgbTooltipModule,
+    NgxPaginationModule
   ],
-  exports: [NgSelectModule],
-  providers: [],
+  exports: [NgSelectModule, NgbTooltipModule],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {

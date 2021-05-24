@@ -1,40 +1,147 @@
 <div class="site-wrapper">
     <div class="container">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <app-breadcrumb></app-breadcrumb>
+            </div>
+        </div>
         <form [formGroup]="subproductForm">
-            <div class="row mt-4">
+            <div class="row mt-2">
                 <div class="col-sm-4">
                     <label for="exampleInputEmail1" class="form-label"><strong>Categoría</strong></label>
                     <select class="form-select" aria-label="Default select example" formControlName="categoria"
-                        name="categira">
+                        name="categira" [ngClass]="{ 'is-invalid': submit && genericControl.categoria.errors}">
                         <option value="" disabled selected>Seleccione</option>
-                        <option value={{item.nombreProducto}} *ngFor="let item of listPructos">{{item.nombreProducto}}
+                        <option value={{item.nombre}} *ngFor="let item of listPructos">{{item.nombre}}
                         </option>
                     </select>
+                    <div *ngIf="submit && genericControl.categoria.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.nombre.errors?.required">Campo requerido
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <label for="exampleInputEmail1" class="form-label"><strong>Nombre del producto</strong></label>
-                    <input type="email" class="form-control" formControlName="nombre" name="nombre"
-                        placeholder="Nombre">
+                    <input type="email" class="form-control" formControlName="nombre" name="nombre" placeholder="Nombre"
+                        [ngClass]="{ 'is-invalid': submit && genericControl.nombre.errors}">
+                    <div *ngIf="submit && genericControl.nombre.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.nombre.errors?.required">Campo requerido
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <label for="exampleInputEmail1" class="form-label"><strong>Precio</strong></label>
-                    <input type="email" class="form-control" formControlName="precio" name="precio"
-                        placeholder="Precio">
+                    <input type="email" class="form-control" formControlName="precio" name="precio" placeholder="Precio"
+                        [ngClass]="{ 'is-invalid': submit && genericControl.precio.errors}"
+                        (blur)="transformAmount($event)">
+                    <div *ngIf="submit && genericControl.precio.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.precio.errors?.required">Campo requerido
+                        </div>
+                        <div *ngIf="genericControl.precio.errors?.pattern">Campo numérico
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row mt-3">
+            <div class="row mt-3" *ngIf="isComprar">
+                <div class="col-sm-4 mt-2">
+                    <label for="floatingTextarea"><strong>Nombre y apellidos</strong></label>
+                    <input type="email" class="form-control" formControlName="nombreApellido" name="nombreApellido"
+                        placeholder="Nombre y apellido"
+                        [ngClass]="{ 'is-invalid': submit && genericControl.nombreApellido.errors}">
+                    <div *ngIf="submit && genericControl.nombreApellido.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.nombreApellido.errors?.required">Campo requerido
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mt-2">
+                    <label for="floatingTextarea"><strong>Cantidad</strong></label>
+                    <input type="email" class="form-control" formControlName="cantidad" name="cantidad"
+                        placeholder="Cantidad" [ngClass]="{ 'is-invalid': submit && genericControl.cantidad.errors}">
+                    <div *ngIf="submit && genericControl.cantidad.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.cantidad.errors?.required">Campo requerido
+                        </div>
+                        <div *ngIf="genericControl.cantidad.errors?.pattern">Campo numérico
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mt-2">
+                    <label for="floatingTextarea"><strong>Forma de pago</strong></label>
+                    <select class="form-select" aria-label="Default select example" formControlName="formaPago"
+                        name="formaPago" [ngClass]="{ 'is-invalid': submit && genericControl.formaPago.errors}">
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value={{item.id}} *ngFor="let item of listFormaPago">{{item.nombre}}
+                        </option>
+                    </select>
+                    <div *ngIf="submit && genericControl.formaPago.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.formaPago.errors?.required">Campo requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3" *ngIf="isComprar">
+                <div class="col-sm-4 mt-2">
+                    <label for="floatingTextarea"><strong>Número de tarjeta</strong></label>
+                    <input type="email" class="form-control" formControlName="numeroTrg" name="numeroTrg"
+                        placeholder="Número tarjeta"
+                        [ngClass]="{ 'is-invalid': submit && genericControl.numeroTrg.errors}">
+                    <div *ngIf="submit && genericControl.numeroTrg.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.numeroTrg.errors?.required">Campo requerido
+                        </div>
+                        <div *ngIf="genericControl.numeroTrg.errors?.pattern">Campo numérico
+                        </div>
+                        <div *ngIf="genericControl.numeroTrg.errors?.maxlength">Máximo 16 dígitos
+                        </div>
+                        <div *ngIf="genericControl.numeroTrg.errors?.minlength">Minimo 16 dígitos
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mt-2">
+                    <label for="floatingTextarea"><strong>Código seguridad</strong></label>
+                    <input type="email" class="form-control" formControlName="codigo" name="codigo" placeholder="Código"
+                        [ngClass]="{ 'is-invalid': submit && genericControl.codigo.errors}">
+                    <div *ngIf="submit && genericControl.codigo.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.codigo.errors?.required">Campo requerido
+                        </div>
+                        <div *ngIf="genericControl.codigo.errors?.pattern">Campo numérico
+                        </div>
+                        <div *ngIf="genericControl.codigo.errors?.maxlength">Máximo 3 dígitos
+                        </div>
+                        <div *ngIf="genericControl.codigo.errors?.minlength">Minimo 3 dígitos
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3" *ngIf="!isComprar">
                 <div class="col-sm-6 mt-2">
                     <label for="floatingTextarea"><strong>Descrición del producto</strong></label>
                     <textarea class="form-control" placeholder="Descrición" formControlName="descripcion"
-                        name="descripcion" id="floatingTextarea"></textarea>
+                        name="descripcion" id="floatingTextarea"
+                        [ngClass]="{ 'is-invalid': submit && genericControl.descripcion.errors}"></textarea>
+                    <div *ngIf="submit && genericControl.descripcion.errors" class="invalid-feedback">
+                        <div *ngIf="genericControl.descripcion.errors?.required">Campo requerido
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer mt-2">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Limpiar</button>
-                <button type="button" class="btn btn-primary" (click)="saveLocalInformation()">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                    (click)="limpiar()">Cancelar</button>
+                <button *ngIf="!isComprar" type="submit" class="btn btn-outline-success"
+                    (click)="guardarInformacionLocal()">Guardar</button>
+                <button *ngIf="isComprar" type="button" class="btn btn-outline-success"
+                    (click)="comprarProducto()">Comprar</button>
             </div>
         </form>
-        <div class="row mt-4">
+        <div class="row" *ngIf="this.listSubProcutos.length > 0">
+            <div class="col-sm-4">
+                <label for="exampleInputEmail1" class="form-label"><strong>Buscar</strong></label>
+                <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="filterSubProducts">
+                <div id="emailHelp" class="form-text">Puedes buscar la información por Categoría o Nombre.
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4" *ngIf="this.listSubProcutos.length > 0">
+
             <div class="col-sm-12">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -43,15 +150,18 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Descripción</th>
+                            <th scope="col">Vendido</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of this.listSubProcutos">
+                        <tr
+                            *ngFor="let item of this.listSubProcutos | pipetransform: filterSubProducts | paginate: { itemsPerPage: 5, currentPage: p };">
                             <th scope="row">{{item.categoria}}</th>
                             <td>{{item.nombre}}</td>
-                            <td>{{item.precio}}</td>
+                            <td>{{item.precio | currency}}</td>
                             <td>{{item.descripcion}}</td>
+                            <td>{{item.vendido}}</td>
                             <td>
                                 <button type="button" class="btn btn-outline-danger" (click)="borrar(item)">
                                     <span><i class="fas fa-trash-alt"></i></span>
@@ -63,6 +173,24 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <div *ngIf="this.listSubProcutos.length > 0">
+                            <pagination-controls previousLabel="Anterior" nextLabel="
+                               Siguiente" style="float: right;" responsive="true" (pageChange)="p = $event">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="alert alert-info" role="alert"
+            *ngIf="this.listSubProcutos.length === 0">
+            <span><i class="fas fa-exclamation-triangle"></i> No hay regitros para mostrar</span>
+        </div>
     </div>
+</div>

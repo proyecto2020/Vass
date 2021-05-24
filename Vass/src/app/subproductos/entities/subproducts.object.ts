@@ -5,4 +5,10 @@ export class SubProductsObject {
   descripcion: string;
   acciones: string;
   idPadre: number;
+  vendido: string;
+  nombreApellido: string;
+  cantidad: number;
+  numeroTrg: number;
+  codigo: number;
+  formaPago: number;
 }

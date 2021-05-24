@@ -17,13 +17,4 @@ export class GeneralService {
   getInformation() {
     return of((data as any).default);
   }
-  save(data: any) {
-    return this.htpp.post(`data.productos.json`, JSON.stringify(data));
-  //   var requestoptions = new RequestOptions({
-  //     method: RequestMethod.Post,
-  //     url: this.apiURL + url,
-  //     headers: headers,
-  //     body: JSON.stringify(data)
-  // })
-  }
 }

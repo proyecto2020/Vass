@@ -1,40 +1,50 @@
 {
     "Productos": [
         {
-            "nombreProducto": "Camisetas",
+            "nombre": "Camisetas",
             "idPadre": 1,
             "logo": "./assets/img/camiseta.png",
             "descripcion": "Es una prenda de vestir compuesta por diferentes elementos que, combinados entre ellos, dan un número infinito de modelos de camisas."
         },
         {
-            "nombreProducto": " Vasos",
+            "nombre": " Vasos",
             "idPadre": 2,
             "logo": "./assets/img/vasos.png",
             "descripcion": "Recipiente para líquidos que sirve para beber; forma parte del servicio de mesa y generalmente es de vidrio, de forma cilíndrica o ligeramente cónica y sin pie."
         },
         {
-            "nombreProducto": "Comics",
+            "nombre": "Comics",
             "idPadre": 3,
             "logo": "./assets/img/comics.png",
             "descripcion": "Relato gráfico que se arman en base a dibujos encuadrados en viñetas. También puede ser conocido como historieta o tebeo dependiendo del lugar o región."
         },
         {
-            "nombreProducto": "Juguetes",
+            "nombre": "Juguetes",
             "idPadre": 4,
             "logo": "./assets/img/juguetesMarvel.png",
             "descripcion": "Un juguete es un objeto diseñado para entretener y divertir a las personas, especialmente a los niños. Sin embargo, además de ser utilizado como elemento de diversión."
         },
         {
-            "nombreProducto": "Superhéroes Marvel",
+            "nombre": "Superhéroes Marvel",
             "idPadre": 5,
             "logo": "./assets/img/heroes.png",
             "descripcion": "Personaje de ficción cuyas características superan las del héroe clásico, generalmente con poderes sobrehumanos aunque no necesariamente, y entroncado con la ciencia ficción. "
         },
         {
-            "nombreProducto": "Juegutes alternativos",
+            "nombre": "Juegutes alternativos",
             "idPadre": 6,
             "logo": "./assets/img/alternativos.png",
             "descripcion": "Estos juguetes alternativos yudan a conocer y desarrollar otras perspectivas y a aprender a pensar y sentir como otros, en definitiva, se trabaja y se desarrolla la empatía en los niños."
+        }
+    ],
+    "FormaPago": [
+        {
+            "nombre": "Visa",
+            "id": 1
+        },
+        {
+            "nombre": "MasterCard",
+            "idPadre": 2
         }
     ]
 }

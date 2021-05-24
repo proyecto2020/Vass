@@ -16,7 +16,10 @@ export class PipetransformPipe implements PipeTransform {
     if (arg === '' || arg.length < 3) return value;
     const resultadoFilter = [];
     for (const item of value) {
-      if (item.nombreProducto.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
+      if (
+        item.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1 ||
+        item.categoria.toLowerCase().indexOf(arg.toLowerCase()) > -1
+      ) {
         resultadoFilter.push(item);
       }
     }

@@ -30,7 +30,7 @@ export class ProductosComponent implements OnInit {
    */
   ordenarAscendente() {
     this.listPructos.sort((itemOne, itemTwo) =>
-      itemOne.nombreProducto.localeCompare(itemTwo.nombreProductoks)
+      itemOne.nombre.localeCompare(itemTwo.nombre)
     );
   }
 
@@ -41,7 +41,7 @@ export class ProductosComponent implements OnInit {
    */
   ordenarDescendente() {
     this.listPructos.sort((temOne, itemTwo) =>
-      itemTwo.nombreProducto.localeCompare(temOne.nombreProducto)
+      itemTwo.nombre.localeCompare(temOne.nombre)
     );
   }
   navegarSubProductos(item) {
