@@ -1,0 +1,68 @@
+<div class="site-wrapper">
+    <div class="container">
+        <form [formGroup]="subproductForm">
+            <div class="row mt-4">
+                <div class="col-sm-4">
+                    <label for="exampleInputEmail1" class="form-label"><strong>Categoría</strong></label>
+                    <select class="form-select" aria-label="Default select example" formControlName="categoria"
+                        name="categira">
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value={{item.nombreProducto}} *ngFor="let item of listPructos">{{item.nombreProducto}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="exampleInputEmail1" class="form-label"><strong>Nombre del producto</strong></label>
+                    <input type="email" class="form-control" formControlName="nombre" name="nombre"
+                        placeholder="Nombre">
+                </div>
+                <div class="col-sm-4">
+                    <label for="exampleInputEmail1" class="form-label"><strong>Precio</strong></label>
+                    <input type="email" class="form-control" formControlName="precio" name="precio"
+                        placeholder="Precio">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-6 mt-2">
+                    <label for="floatingTextarea"><strong>Descrición del producto</strong></label>
+                    <textarea class="form-control" placeholder="Descrición" formControlName="descripcion"
+                        name="descripcion" id="floatingTextarea"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer mt-2">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Limpiar</button>
+                <button type="button" class="btn btn-primary" (click)="saveLocalInformation()">Guardar</button>
+            </div>
+        </form>
+        <div class="row mt-4">
+            <div class="col-sm-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of this.listSubProcutos">
+                            <th scope="row">{{item.categoria}}</th>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.precio}}</td>
+                            <td>{{item.descripcion}}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger" (click)="borrar(item)">
+                                    <span><i class="fas fa-trash-alt"></i></span>
+                                </button>
+                                <button type="button" class="btn btn-outline-success" (click)="comprar(item)">
+                                    <span><i class="fas fa-shopping-cart"></i></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
